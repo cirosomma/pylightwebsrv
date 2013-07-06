@@ -3,6 +3,7 @@
 import select
 import socket
 import sys
+
 host = None
 port = None
 log = 0
