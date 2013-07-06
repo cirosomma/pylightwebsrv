@@ -3,38 +3,14 @@
 import select
 import socket
 import sys
+from manageRequest import manageRequest
 
 host = None
 port = None
 log = 0
 directory = 'html/'
 index = 'index.html'
-class manageRequest:
-	def __init__(self, data,client):
-		self.data = data
-		self.client = client
-		self.createRequest()
-		if log == 1:
-			try:
-				with open('log','a+') as f:
-					f.write(client[0]+" "+data)
-					f.close()
-			except IOError:
-				print "Doesn't can it write on log file"
-	def output(self):
-		return self.data
-	def createRequest(self):
-		request = self.data.split(" ")
-		try:
-			if request[1] == '/':
-				request[1] = '/'+index
-			
-			with open(directory + request[1][1:]) as x:
-				self.data = x.read()
-				x.close()
-					
-		except IOError:
-			self.data = '404: Not Found'
+
 try:
 	with open('config','r') as config:
 		for line in config:
@@ -99,7 +75,7 @@ while 1:
 	data = conn.recv(4096)
 	if not data : break
 	datas = data.split("\n")
-	request = manageRequest(datas[0],addr)
+	request = manageRequest(datas[0],addr,index,directory,log)
 	conn.send(request.output())
 	conn.close()
 s.close()
