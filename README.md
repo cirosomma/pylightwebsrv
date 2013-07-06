@@ -4,7 +4,7 @@ Pylightwebsrv
 A simple web server written in python with socket module.
 
 Features : 
-[+] A config file for loading quickly information of startup
+[+] A config file for loading quickly information of startup\n
 [+] A log file with all request GET or POST
 [+] Only static page can be opened
 
